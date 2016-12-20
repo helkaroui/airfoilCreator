@@ -1,0 +1,70 @@
+function [ airfoil , camber ] = Naca_4_digits_generator( nacaType , NumberPoints)
+% Inputs:
+% nacaType String the naca designation
+%Outputs:
+% airfoil Matrix The generated airfoil
+% camber Matrix The generated camber line
+
+Minit = str2double(nacaType(1));
+Pinit = str2double(nacaType(2));
+Tinit = str2double(nacaType(3:4));
+
+% Constants used in thickness calculation
+a0 = 0.2969;
+a1 = -0.1260;
+a2 = -0.3516;
+a3 = 0.2843;
+a4 = -0.1015;        % Open trailing edge
+%a4 = -0.1036;       % Closed trailing edge
+
+% Percentage values
+M = Minit /100;
+P = Pinit /10;
+T = Tinit /100;
+X = linspace(0,1,NumberPoints)';
+
+% Camber
+Yc = ones(NumberPoints,1);
+dYc = ones(NumberPoints,1);
+theta = ones(NumberPoints,1);
+for i=1:NumberPoints
+    if (X(i) < P) 
+        Yc(i)= (M/P^2)*((2*P*X(i)) - X(i)^2);
+        dYc(i) = ((2*M)/(P^2))*(P-X(i));
+    elseif (X(i) > P)
+        Yc(i)= (M/(1-P)^2)*( 1 - 2*P  + 2*P*X(i) - X(i)^2);
+        dYc(i) = ((2*M)/((1-P)^2))*(P-X(i));
+    end
+    theta(i) = atan(dYc(i));
+end
+Yt = ones(NumberPoints,1);
+for i=1:NumberPoints
+   A0= a0 * sqrt(X(i)) ;
+   A1= a1 * X(i);
+   A2= a2 * X(i)^2;
+   A3= a3 * X(i)^3;
+   A4= a4 * X(i)^4;
+   Yt(i) = 5*T*(A0+A1+A2+A3+A4);
+end
+Yt = 5*T.*((a0.*sqrt(X)) + (a1.*X) + (a2.*X.^2) + (a3.*X.^3) + (a4.*X.^4));
+% Upper Points
+Xu = ones(NumberPoints , 1);
+Yu = ones(NumberPoints , 1);
+for i=1:NumberPoints
+    Xu(i) = X(i) - Yt(i) * sin(theta(i));
+    Yu(i) = Yc(i) + Yt(i) * cos(theta(i));
+end
+% Lower Points
+Xl = ones(NumberPoints , 1);
+Yl = ones(NumberPoints , 1);
+for i=1:NumberPoints
+    Xl(i) = X(i) + Yt(i) * sin(theta(i));
+    Yl(i) = Yc(i) - Yt(i) * cos(theta(i));
+end
+
+hold on; grid on;
+axis equal;
+plot(Xu,Yu,'r-');
+plot(Xl,Yl,'b-');
+end
+
