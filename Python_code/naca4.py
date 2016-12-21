@@ -78,10 +78,12 @@ def main():
                     python {0} -p 2412
                 Generate points for NACA profile 2412 with 300 points
                     python {0} -p 2412 -n 300
-                Generate points for NACA profile 2412 and display the result
-                    python {0} -p 2412 -d
-                Generate points for NACA profile 2412 with smooth points spacing and display the result
-                    python {0} -p 2412 -d -s
+                Generate points for NACA profile 2412 and desable displaying the result
+                    python {0} -p 2412 -nd
+                Generate points for NACA profile 2412 And save the generated data to the given filename.
+                    python {0} -p 2412 -d -s result.data
+                Generate points for NACA profile 2412 And set the chord length to 10.
+                    python {0} -p 2412 -c 10
             '''.format(os.path.basename(__file__))))
 
 
@@ -96,9 +98,9 @@ def main():
     parser.add_argument('-nd','--not_display', action = 'store_true', \
                         help = 'Flag used to disable display the profile.')
     parser.add_argument('-c','--chord', type = float , default = 1.0 , \
-                        help = 'The total length of the chord.')
+                        help = 'set the total length of the chord.')
     parser.add_argument('-pr','--precision',type = int , default = 5, \
-                        help = 'The precision of coordinates when saving to file.')
+                        help = 'set the precision of coordinates when saving to file.')
     args = parser.parse_args()
 
     if args.profile is None:
