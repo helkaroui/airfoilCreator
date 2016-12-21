@@ -19,6 +19,9 @@ optional arguments:
   -c CHORD, --chord           set the total length of the chord.
   -pr PRECISION, --precision  set the precision of coordinates when saving to file.
 
+![](https://wikimedia.org/api/rest_v1/media/math/render/svg/c3a11aaac276014e2e8883b9953da75642e2b111)
+
+
 Examples:
     Get help
         python naca4.py -h
