@@ -1,4 +1,7 @@
 # airfoilCreator
+
+https://github.com/helkaroui/airfoilCreator/wiki
+
 naca4.py is a script to generate NACA4 profiles. If no argument is provided, no demo is displayed.
 
 optional arguments:
