@@ -1,7 +1,5 @@
 # airfoilCreator
-
-https://github.com/helkaroui/airfoilCreator/wiki
-
+![](https://people.sc.fsu.edu/~jburkardt/m_src/naca/symmetric.png)
 naca4.py is a script to generate NACA4 profiles. If no argument is provided, no demo is displayed.
 
 optional arguments:
@@ -17,21 +15,9 @@ optional arguments:
   -nd, --not_display    Flag used to disable display the profile.
   
   -c CHORD, --chord           set the total length of the chord.
+  
   -pr PRECISION, --precision  set the precision of coordinates when saving to file.
-
-![](https://wikimedia.org/api/rest_v1/media/math/render/svg/c3a11aaac276014e2e8883b9953da75642e2b111)
-
-
-Examples:
-    Get help
-        python naca4.py -h
-    Generate points for NACA profile 2412
-        python naca4.py -p 2412
-    Generate points for NACA profile 2412 with 300 points
-        python naca4.py -p 2412 -n 300
-    Generate points for NACA profile 2412 and desable displaying the result
-        python naca4.py -p 2412 -nd
-    Generate points for NACA profile 2412 And save the generated data to the given filename.
-        python naca4.py -p 2412 -d -s result.data
-    Generate points for NACA profile 2412 And set the chord length to 10.
-        python naca4.py -p 2412 -c 10
+  
+  Example:
+  
+  `naca4.py -p 2412 -s 2412.data`
